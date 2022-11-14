@@ -1,25 +1,24 @@
 public class Solution {
     public bool IsPalindrome(int x) {
-        List<int> list = new List<int>();
-        if(x<0)
-            return false;
+        //updated since my last case, this should run even better due reduced iterations
+        //i was on the right track by using modulo to avoid converting to string
+        //this should be much improved
 
-//Challenged to not convert to string for comparison, 
-//use modulos to check digit and division to move 
-        while (x != 0) {
-            list.Add(x%10);
+        // immediately return false and special cases
+        //if x is negative, it cannot be palindrome according to prompt
+        //also any num ending in 0 cannot be as any 0 before a num will be dropped by rational people
+        //except for the number 0 on it's own
+        if(x < 0 || (x % 10 == 0 && x != 0)) {
+            return false;
+        }
+
+        int revertedNumber = 0;
+        while(x > revertedNumber) {
+            revertedNumber = revertedNumber * 10 + x % 10;
             x /= 10;
         }
-        List<int> reverse = Enumerable.Reverse(list).ToList();
 
-//only need to check half the list.Count to check if mirrored
-//any middle int's don't matter and shouldn't be checked
-        for(int i = 0; i<list.Count/2; i++)
-        {
-            Console.WriteLine("Compare " + list[i] + " : " + reverse[i]);
-            if(list[i] != reverse[i])
-                return false;
-        }
-        return true;
-    }
+        // Remove middle num if odd and check both halves of x
+        return x == revertedNumber || x == revertedNumber/10;
+}
 }
