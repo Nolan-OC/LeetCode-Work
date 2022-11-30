@@ -1,0 +1,26 @@
+class Solution(object):
+    def uniqueOccurrences(self, arr):
+
+        #I use a dictionary to count occurences, if exists in dictionary value ++
+        #if isn't in dictionary add it. Simple!
+        dict = {}
+
+        for i in arr:
+            if i in dict:
+                dict[i] +=1
+            else:
+                #add to dict
+                dict[i] = 1
+        #I then add them to its own array, and loop through 
+        #while checking if it already exists, if it does we return False immediately,
+        #otherwise return true at the end
+        occurences = []
+        for i in occurences:
+            print(i)
+
+        for i in dict:
+            if dict[i] in occurences:
+                return False
+            occurences.append(dict[i])
+
+        return True
